@@ -2,29 +2,99 @@
     <meta charset="utf-8">
     <head>
     </head>
+<style>
+.grid-container {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  background-color: #2196F3;
+  padding: 10px;
+}
+
+.grid-item {
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(0, 0, 0, 0.8);
+  padding: 20px;
+  font-size: 30px;
+  text-align: center;
+}
+
+.grid-container2 {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  background-color: #77777;
+  padding: 10px;
+}
+
+.instruction {
+  text-align: left;
+  font-size: 15px;
+}
+</style>
+
     <body>
-		    <div class="spinner" id='spinner'></div>
+	    <div class="spinner" id='spinner'></div>
 	    <div class="emscripten" id="status">Downloading...</div>
 	    <div class="emscripten">
 	      <progress value="0" max="100" id="progress" hidden=1></progress>
 	    </div>
 
         <div>
-        <textarea id="edit" style="width: 800px; height: 480px;">
-function hello_lua()
-    print "Hello Lua!"
-end
+		<div class="grid-container">
+			<div class="tutorialpane grid-item">
 
-hello_lua()</textarea>
-	<button name="button" onclick="text_changed();">run code</button>
-        <div id="result" style="width: 800px; float: right"></div>
-        </div>
-    <div class="emscripten_border">
-      <canvas class="emscripten" id="canvas" oncontextmenu="event.preventDefault()" tabindex=-1></canvas>
+				<div id="tuto1">
+				<span>Tutorial 1</span>
+<p class="instruction">
+Welcome to world of programming! When the programmer newly introduce to world of programming.
+We do certain ritual. It's like praying for good fortune. Type following text and run the code!
+</p>
+<pre class="instruction">
+
+print "Hello World!"
+</pre>
+				</div>
+				<button name="button" onclick="nexttutorial();">next</button>
+			</div>
+			<textarea id="edit" style="width: 400px; height: 480px;"></textarea>
+			<button name="button" onclick="text_changed();">run code</button>
+		</div>
+		<div class="grid-container2">
+			<div id="result" class="grid-item" style="width: 300px; float: right">
+				<div class="emscripten_border">
+				<canvas class="emscripten" id="canvas" oncontextmenu="event.preventDefault()" tabindex=-1></canvas>
+				</div>
+			</div>
+			<div class="grid-item">
+			    <textarea id="output" rows="17" style="width: 500px"></textarea>
+			</div>
+		</div>
+	</div>
     </div>
 
-    <textarea id="output" rows="8"></textarea>
+    <script type="text/javascript" src="jquery-3.4.1.min.js"></script>
     <script type='text/javascript'>
+	    $("#edit").keydown(function(e) {
+		        if(e.keyCode === 9) { // tab was pressed
+				        // get caret position/selection
+				        var start = this.selectionStart;
+				        var end = this.selectionEnd;
+
+				        var $this = $(this);
+				        var value = $this.val();
+
+				        // set textarea value to: text before caret + tab + text after caret
+				        $this.val(value.substring(0, start)
+						                    + "\t"
+						                    + value.substring(end));
+
+				        // put caret at right position again (add one for the tab)
+				        this.selectionStart = this.selectionEnd = start + 1;
+
+				        // prevent the focus lose
+				        e.preventDefault();
+				    }
+	    });
+
       var statusElement = document.getElementById('status');
       var progressElement = document.getElementById('progress');
       var spinnerElement = document.getElementById('spinner');
