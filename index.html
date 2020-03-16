@@ -1,0 +1,246 @@
+<html>
+    <meta charset="utf-8">
+    <head>
+    </head>
+<style>
+.grid-container {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  background-color: #2196F3;
+  padding: 10px;
+}
+
+.grid-item {
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(0, 0, 0, 0.8);
+  padding: 20px;
+  font-size: 30px;
+  text-align: center;
+}
+
+.grid-container2 {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  background-color: #77777;
+  padding: 10px;
+}
+
+.instruction {
+  text-align: left;
+  font-size: 15px;
+  width: 400px; 
+}
+</style>
+
+    <body>
+	    <div class="spinner" id='spinner'></div>
+	    <div class="emscripten" id="status">Downloading...</div>
+	    <div class="emscripten">
+	      <progress value="0" max="100" id="progress" hidden=1></progress>
+	    </div>
+
+        <div>
+		<div class="grid-container">
+			<div class="tutorialpane grid-item">
+
+				<div id="tuto1">
+				<span>Tutorial 1</span>
+<p class="instruction">
+Welcome to world of programming! When the programmer newly introduce to world of programming.
+We do certain ritual. It's like praying for good fortune. Type following text and run the code!
+</p>
+<pre class="instruction">
+
+print "Hello World!"
+</pre>
+				</div>
+				<div id="tuto2">
+				<span>Tutorial 2</span>
+<p class="instruction">
+how about trying some arithmetic?
+</p>
+<pre class="instruction">
+a = 1+1
+b = 3*9
+c = 13/2
+print(a)
+print(b)
+print(c)
+</pre>
+				</div>
+				<div id="tuto3">
+				<span>Tutorial 3</span>
+<p class="instruction">
+do you know fibonacci number?
+you can program it pretty easily with a few lines of code.
+</p>
+<pre class="instruction">
+function fibonacci(n)
+    if n<3 then
+        return 1
+    else
+        return fibonacci(n-1) + fibonacci(n-2)
+    end
+end
+print(fibonacci(10))
+</pre>
+				</div>
+				<div id="tuto4">
+				<span>Tutorial 4</span>
+<p class="instruction">
+Now we are going to test how display works in our fantasy console. 
+I've prepared a speical function for that. Type this command to test!
+</p>
+<pre class="instruction">
+colorful_render()
+</pre>
+				</div>
+				<div id="tuto5">
+				<span>Done!!</span>
+<p class="instruction">
+This is all I've prepared for this time.
+we will build our first game with this education fantasy console, The Gorillas!
+looking forward to meet you again!
+</p>
+<img src="Gorillas_screenshot.png"/>
+				</div>
+				<button id="nextbutton" name="button" onclick="nexttutorial();">next</button>
+			</div>
+			<textarea id="edit" style="width: 400px; height: 480px;"></textarea>
+			<button name="button" onclick="text_changed();">run code</button>
+		</div>
+		<div class="grid-container2">
+			<div id="result" class="grid-item" style="width: 300px; float: right">
+				<div class="emscripten_border">
+				<canvas class="emscripten" id="canvas" oncontextmenu="event.preventDefault()" tabindex=-1></canvas>
+				</div>
+			</div>
+			<div class="grid-item">
+			    <textarea id="output" rows="17" style="width: 500px"></textarea>
+			</div>
+		</div>
+	</div>
+    </div>
+
+    <script type="text/javascript" src="jquery-3.4.1.min.js"></script>
+    <script type='text/javascript'>
+        var tuto_status = 0
+        function nexttutorial()
+        {
+            var total_page=5
+            ++tuto_status;
+            for(var i=1; i<=total_page;++i)
+                $('#tuto'+i).hide();
+            $('#tuto'+tuto_status).show();
+			if( tuto_status == total_page )
+			{
+				$('#nextbutton').hide();	
+			}
+        }
+        nexttutorial();
+	    $("#edit").keydown(function(e) {
+		        if(e.keyCode === 9) { // tab was pressed
+				        // get caret position/selection
+				        var start = this.selectionStart;
+				        var end = this.selectionEnd;
+
+				        var $this = $(this);
+				        var value = $this.val();
+
+				        // set textarea value to: text before caret + tab + text after caret
+				        $this.val(value.substring(0, start)
+						                    + "\t"
+						                    + value.substring(end));
+
+				        // put caret at right position again (add one for the tab)
+				        this.selectionStart = this.selectionEnd = start + 1;
+
+				        // prevent the focus lose
+				        e.preventDefault();
+				    }
+	    });
+
+      var statusElement = document.getElementById('status');
+      var progressElement = document.getElementById('progress');
+      var spinnerElement = document.getElementById('spinner');
+
+      var Module = {
+        preRun: [],
+        postRun: [],
+        print: (function() {
+          var element = document.getElementById('output');
+          if (element) element.value = ''; // clear browser cache
+          return function(text) {
+            if (arguments.length > 1) text = Array.prototype.slice.call(arguments).join(' ');
+            // These replacements are necessary if you render to raw HTML
+            //text = text.replace(/&/g, "&amp;");
+            //text = text.replace(/</g, "&lt;");
+            //text = text.replace(/>/g, "&gt;");
+            //text = text.replace('\n', '<br>', 'g');
+            console.log(text);
+            if (element) {
+              element.value += text + "\n";
+              element.scrollTop = element.scrollHeight; // focus on bottom
+            }
+          };
+        })(),
+        printErr: function(text) {
+          if (arguments.length > 1) text = Array.prototype.slice.call(arguments).join(' ');
+          console.error(text);
+        },
+        canvas: (function() {
+          var canvas = document.getElementById('canvas');
+
+          // As a default initial behavior, pop up an alert when webgl context is lost. To make your
+          // application robust, you may want to override this behavior before shipping!
+          // See http://www.khronos.org/registry/webgl/specs/latest/1.0/#5.15.2
+          canvas.addEventListener("webglcontextlost", function(e) { alert('WebGL context lost. You will need to reload the page.'); e.preventDefault(); }, false);
+
+          return canvas;
+        })(),
+        setStatus: function(text) {
+          if (!Module.setStatus.last) Module.setStatus.last = { time: Date.now(), text: '' };
+          if (text === Module.setStatus.last.text) return;
+          var m = text.match(/([^(]+)\((\d+(\.\d+)?)\/(\d+)\)/);
+          var now = Date.now();
+          if (m && now - Module.setStatus.last.time < 30) return; // if this is a progress update, skip it if too soon
+          Module.setStatus.last.time = now;
+          Module.setStatus.last.text = text;
+          if (m) {
+            text = m[1];
+            progressElement.value = parseInt(m[2])*100;
+            progressElement.max = parseInt(m[4])*100;
+            progressElement.hidden = false;
+            spinnerElement.hidden = false;
+          } else {
+            progressElement.value = null;
+            progressElement.max = null;
+            progressElement.hidden = true;
+            if (!text) spinnerElement.style.display = 'none';
+          }
+          statusElement.innerHTML = text;
+        },
+        totalDependencies: 0,
+        monitorRunDependencies: function(left) {
+          this.totalDependencies = Math.max(this.totalDependencies, left);
+          Module.setStatus(left ? 'Preparing... (' + (this.totalDependencies-left) + '/' + this.totalDependencies + ')' : 'All downloads complete.');
+        }
+      };
+      Module.setStatus('Downloading...');
+      window.onerror = function(event) {
+        // TODO: do not warn on ok events like simulating an infinite loop or exitStatus
+        Module.setStatus('Exception thrown, see JavaScript console');
+        spinnerElement.style.display = 'none';
+        Module.setStatus = function(text) {
+          if (text) Module.printErr('[post-exception status] ' + text);
+        };
+      };
+
+            function text_changed() {
+			  input = document.getElementById("edit").value;
+                        Module.ccall("run_lua", 'number', ['string'], [input]);
+           }
+    </script>
+    <script async type="text/javascript" src="main.js"></script>
+    </body>
+</html>
