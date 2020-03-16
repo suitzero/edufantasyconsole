@@ -9,7 +9,7 @@
 #include <emscripten.h>
 #endif
 
-void render(){
+int render(lua_State *l){
 	  SDL_Init(SDL_INIT_VIDEO);
 	  SDL_Surface *screen = SDL_SetVideoMode(256, 256, 32, SDL_SWSURFACE);
 
@@ -38,11 +38,14 @@ void render(){
 	  printf("and here is some text that should be HTML-friendly: amp: |&| double-quote: |\"| quote: |'| less-than, greater-than, html-like tags: |<cheez></cheez>|\nanother line.\n");
 
 	  SDL_Quit();
+	  return 0;
 }	
 
 int run_lua(const char* script) {
 	lua_State* lua = luaL_newstate();
 	luaL_openlibs(lua);
+
+    lua_register(lua, "colorful_render", render);
 
 	int res = luaL_dostring(lua, script);
 
@@ -52,7 +55,6 @@ int run_lua(const char* script) {
 	printf("%s\n", value);
 
 	lua_close(lua);
-	render();
 
 	return 0;
 }
