@@ -102,12 +102,13 @@ This is all I've prepared for this time.
 we will build our first game with this education fantasy console, The Gorillas!
 looking forward to meet you again!
 </p>
-<img src="Gorillas_screenshot.png"/>
+<img src="assets/Gorillas_screenshot.png"/>
 				</div>
 				<button id="nextbutton" name="button" onclick="nexttutorial();">next</button>
 			</div>
 			<textarea id="edit" style="width: 400px; height: 480px;"></textarea>
-			<button name="button" onclick="text_changed();">run code</button>
+			<button id="runcode" name="button" onclick="text_changed();">run code</button>
+			<button id="cancelrun" name="button" onclick="cancel_run();">cancel run</button>
 		</div>
 		<div class="grid-container2">
 			<div id="result" class="grid-item" style="width: 300px; float: right">
@@ -125,6 +126,8 @@ looking forward to meet you again!
     <script type="text/javascript" src="jquery-3.4.1.min.js"></script>
     <script type='text/javascript'>
         var tuto_status = 0
+
+              $("#cancelrun").hide();
         function nexttutorial()
         {
             var total_page=5
@@ -238,7 +241,17 @@ looking forward to meet you again!
 
             function text_changed() {
 			  input = document.getElementById("edit").value;
+              $("#edit").prop( "disabled", true );
+              $("#cancelrun").show();
+              $("#runcode").hide();
                         Module.ccall("run_lua", 'number', ['string'], [input]);
+           }
+            function cancel_run() {
+			  input = document.getElementById("edit").value;
+              $("#edit").prop( "disabled", false );
+              $("#cancelrun").hide();
+              $("#runcode").show();
+                        Module.ccall("cancel_run", 'number', ['string'], [input]);
            }
     </script>
     <script async type="text/javascript" src="main.js"></script>
