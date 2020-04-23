@@ -1,0 +1,113 @@
+<div id="tuto1">
+<span>Let's build a building!</span>
+<pre class="instruction">
+
+Let's build a green building with blue window!
+follow through this code!
+
+height = 100
+green={255,0,0}
+blue={0,255,0}
+
+fill_rect(100,height,50,256-height,green[0],green[1],green[2])
+
+-- drawing windows here
+for j=0,2 do
+	for k=0,10 do
+		fill_rect(100+5+j*15,height+5+k*15,10,10,blue[0],blue[1],blue[2])
+	end 
+end
+</pre>
+</div>
+
+
+
+<div id="tuto2">
+<span>Let's build buildings!</span>
+<p class="instruction">
+how about multiple buildings!
+</p>
+<pre class="instruction">
+numbuildings = 5
+heights={}
+colors={}
+for i=1,numbuildings do
+    heights[i] = 100+math.random(100)
+    colors[i] = math.random(20)
+end
+
+-- width of a building!
+bw =(256/numbuildings)
+
+function draw_buildings()
+    for i=1,numbuildings do
+
+	  fill_rect((i-1)*bw,heights[i],bw,256-heights[i],172+colors[i],172+colors[i],160+colors[i])
+
+	  for j=0,2 do
+		for k=0,10 do
+		fill_rect((i-1)*bw+5+j*15,heights[i]+5+k*15,10,10,222,222,222)
+		end 
+	  end
+    end
+end
+
+draw_buildings()
+</pre>
+</div>
+
+
+<div id="tuto3">
+<span>Drawing a Sprite</span>
+<p class="instruction">
+For game developement, we often use sprite which is a pre-drawn grid image. 
+I've drawn follwing images for you!
+</p>
+<img src="assets/banana.png"/>
+<img src="assets/explosion.png"/>
+<img src="assets/gorilla0.png"/>
+<img src="assets/gorilla1.png"/>
+<img src="assets/gorilla2.png"/>
+<img src="assets/gorilla3.png"/>
+<img src="assets/sun.png"/>
+<pre class="instruction">
+Play with following function!
+
+spr(1,100,30,16,12)
+
+First prameter is the sprite number and rests are start position and size.
+you can also paint background for good visilbility like as follows,
+
+fill_rect(0,0,256,256,153,217,234)
+spr(3,100,30,40,40)
+</pre>
+</div>
+<div id="tuto4">
+<span>Animation with sprites</span>
+<p class="instruction">
+</p>
+</div>
+
+<div id="tuto5">
+<span>Input Control</span>
+<p class="instruction">
+</p>
+</div>
+
+<div id="tuto6">
+<span>Projectile Motion</span>
+<p class="instruction">
+</p>
+</div>
+
+<div id="tuto7">
+<span>Game Rule</span>
+<p class="instruction">
+</p>
+</div>
+
+<div id="tuto8">
+<span>Gorillas!!</span>
+<p class="instruction">
+</p>
+</div>

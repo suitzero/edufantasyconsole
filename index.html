@@ -3,6 +3,9 @@
     <head>
     </head>
 <style>
+.grid-base {
+ width: 1000px;
+}
 .grid-container {
   display: grid;
   grid-template-columns: auto auto auto;
@@ -24,275 +27,43 @@
   background-color: #77777;
   padding: 10px;
 }
+.tutorialpane {
+  width: 440px;
+  word-wrap: break-word;
+}
 
 .instruction {
   text-align: left;
   font-size: 15px;
   width: 400px; 
 }
+
+pre {
+ white-space: pre-wrap;       /* css-3 */
+ white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+ white-space: -pre-wrap;      /* Opera 4-6 */
+ white-space: -o-pre-wrap;    /* Opera 7 */
+ word-wrap: break-word;       /* Internet Explorer 5.5+ */
+}
 </style>
 
     <body>
+        <div style="visibility:hidden"> 
 	    <div class="spinner" id='spinner'></div>
 	    <div class="emscripten" id="status">Downloading...</div>
 	    <div class="emscripten">
 	      <progress value="0" max="100" id="progress" hidden=1></progress>
 	    </div>
+        </div>
 
-        <div>
+        <div class="grid-base">
 		<div class="grid-container">
 			<div class="tutorialpane grid-item">
-
-				<div id="tuto1">
-				<span>Tutorial 1</span>
-<p class="instruction">
-Welcome to world of programming! When the programmer newly introduce to world of programming.
-We do certain ritual. It's like praying for good fortune. Type following text and run the code!
-</p>
-<pre class="instruction">
-
-print "Hello World!"
-</pre>
-				</div>
-				<div id="tuto2">
-				<span>Tutorial 2</span>
-<p class="instruction">
-how about trying some arithmetic?
-</p>
-<pre class="instruction">
-a = 1+1
-b = 3*9
-c = 13/2
-print(a)
-print(b)
-print(c)
-</pre>
-				</div>
-				<div id="tuto3">
-				<span>Tutorial 3</span>
-<p class="instruction">
-do you know fibonacci number?
-you can program it pretty easily with a few lines of code.
-</p>
-<pre class="instruction">
-function fibonacci(n)
-    if n<3 then
-        return 1
-    else
-        return fibonacci(n-1) + fibonacci(n-2)
-    end
-end
-print(fibonacci(10))
-</pre>
-				</div>
-				<div id="tuto4">
-				<span>Tutorial 4</span>
-<p class="instruction">
-Now we are going to test how display works in our fantasy console. 
-I've prepared a speical function for that. Type this command to test!
-</p>
-<pre class="instruction">
-colorful_render()
-</pre>
-				</div>
-				<div id="tuto5">
-				<span>Done!!</span>
-<p class="instruction">
-This is all I've prepared for this time.
-we will build our first game with this education fantasy console, The Gorillas!
-looking forward to meet you again!
-</p>
-<img src="assets/Gorillas_screenshot.png"/>
-				</div>
-				<button id="nextbutton" name="button" onclick="nexttutorial();">next</button>
-			</div>
-			<textarea id="edit" style="width: 400px; height: 480px;">
-
-SCREEN_WIDTH=256
-SCREEN_HEIGHT=256
-numbuildings = 5
-heights={}
-colors={}
-game={state=0}
-player1={state=0,x=0,y=0,score=0,spr_num=3,width=32,height=22}
-player2={state=0,x=0,y=0,score=0,spr_num=3,width=32,height=22}
-banana={state=0,x=0,y=0,angle=0,velocity=0,spr_num=1,READY=0,Launch=1,EXPLODE=2,width=16,height=12}
-tick=0
-g=0.08
-t=0
-current_player = player1
-hitplayer = 0
-function init_game()
-	for i=1,numbuildings do
-		heights[i] = 100+math.random(100)
-		colors[i] = math.random(20)
-	end
-
-	player1.x = 10/10
-	player1.y = heights[1]-22
-	player2.x = 220
-	player2.y = heights[numbuildings]-22
-	
-	banana.angle = 0
-	banana.velocity = 0
-	if player1.score >= player2.score then
-		current_player = player1
-		banana.x = current_player.x
-		player1.spr_num=5
-	else
-		current_player = player2
-		banana.x = current_player.x+15
-		player2.spr_num=4
-	end
-	banana.y = current_player.y-10
-	hitplayer = 0
-end
-
-init_game()
-bw =(SCREEN_WIDTH/numbuildings)
-
-function draw_buildings()
-    for i=1,numbuildings do 
-	  fill_rect((i-1)*bw,heights[i],bw,SCREEN_HEIGHT-heights[i],172+colors[i],172+colors[i],160+colors[i])
-
-	  for j=0,2 do
-		for k=0,10 do
-			fill_rect((i-1)*bw+5+j*15,heights[i]+5+k*15,10,10,222,222,222)
-		end 
-	  end
-    end
-end
-
-ex=-1
-ey=-1
-function update_banana()
-	if banana.state == banana.Launch then
-		banana.x = banana.x + (banana.velocity * math.cos(banana.angle))
-		banana.y = banana.y - banana.velocity * math.sin(banana.angle) + g*t
-		t=t+1
-	end
-	if banana.state == banana.EXPLODE then
-		banana.spr_num = 2
-		if ex == -1 and ey == -1 then
-			ex = banana.x
-			ey = banana.y
-			t = 200
-		end
-		banana.x=ex-(t%10)/2
-		banana.y=ey-(t%10)/2
-		banana.width=16+t%10
-		banana.height=12+t%10
-		t=t+1
-	end
-	if t > 250 then
-		ex=-1
-		ey=-1
-		banana.state = banana.READY
-		banana.spr_num = 1
-		banana.width=16
-		banana.height=12
-		t=0
-		if hitplayer == 0 then
-			if current_player == player2 then
-				current_player = player1
-				player1.spr_num=5
-				player2.spr_num=3
-				banana.x = current_player.x
-			else
-				current_player = player2
-				player1.spr_num=3
-				player2.spr_num=4
-				banana.x = current_player.x+15
-			end
-		else
-			if hitplayer == 2 then
-				player1.score=player1.score+1
-			else
-				player2.score=player2.score+1
-			end
-			init_game()
-		end
-
-		banana.y = current_player.y-10
-	end
-	i = math.floor(banana.x/bw)+1
-	if banana.y > heights[i] then
-		banana.state = banana.EXPLODE
-	end
-	if banana.state ~= banana.EXPLODE then
-		if banana.y > player1.y and math.abs(banana.x-player1.x)<3 then
-			banana.state = banana.EXPLODE
-			--player2.score=player2.score+1
-			player2.spr_num=6
-			hitplayer=1
-		end
-		if banana.y > player2.y and math.abs(banana.x-player2.x)<3 then
-			banana.state = banana.EXPLODE
-			--player1.score=player1.score+1
-			player1.spr_num=6
-			hitplayer=2
-		end
-	end
-	-- if banana.x < 0 or banana.y < 0 or banana.x > SCREEN_WIDTH or banana.y > SCREEN_HEIGHT then
-		-- banana.state = banana.READY
-		-- t=0
-		-- banana.x = player1.x
-		-- banana.y = player1.y
-	-- end
-	banana.angle = math.min(math.max(banana.angle,0),3.14)
-	banana.velocity = math.min(math.max(banana.velocity,0),7)
-end
-
-function draw_banana()
-	spr(banana.spr_num,banana.x,banana.y,banana.width,banana.height)
-end
-
-function _draw()
-	fill_rect(0,0,256,256,153,217,234)
-	draw_buildings()	
-	tick=tick+1
-	spr(player1.spr_num,player1.x,player1.y,player1.width,player1.height)
-	spr(player2.spr_num,player2.x,player2.y,player2.width,player2.height)
-	spr(7,125,10,32,32)
-	draw_banana()
-	write_text("Player1",3,3,48,8)
-	write_text("Player2",205,3,48,8)
-	write_text(tostring(player1.score)..">Score<"..tostring(player2.score),90,235,70,16)
-	if game.state == 1 then
-		if player1.score > player2.score then
-			write_text("PLAYER1 WIN",55,100,140,40)
-		else
-			write_text("PLAYER2 WIN",55,100,150,40)
-		end
-	else
-		if current_player == player1 then
-			write_text("Angle:"..tostring(banana.angle),3,14,40,8)
-			write_text("Velocity:"..tostring(banana.velocity),3,25,55,8)
-		else
-			write_text("Angle:"..tostring(banana.angle),200,14,40,8)
-			write_text("Velocity:"..tostring(banana.velocity),200,25,55,8)		
-		end
-	end
-	
-end
-
-function _update()
-	if game.state == 0 then
-		if btn(0) then banana.angle=banana.angle+0.01 end
-		if btn(1) then banana.angle=banana.angle-0.01 end
-		if btn(2) then banana.velocity=banana.velocity+0.1 end
-		if btn(3) then banana.velocity=banana.velocity-0.1 end
-		if btn(4) and banana.state == banana.READY then 
-			banana.state = banana.Launch 
-		end
-		update_banana()
-	end
-	if player1.score + player2.score >= 3 and game.state == 0 then
-		game.state = 1
-	end
-end
-
-
+            <div id="tutopane">
+            </div>
+            <button id="nextbutton" name="button" onclick="nexttutorial();">next</button>
+            </div>
+			<textarea id="edit" style="width: 450px; height: 480px;">
             </textarea>
 			<button id="runcode" name="button" onclick="text_changed();">run code</button>
 			<button id="cancelrun" name="button" onclick="cancel_run();">cancel run</button>
@@ -312,22 +83,46 @@ end
 
     <script type="text/javascript" src="jquery-3.4.1.min.js"></script>
     <script type='text/javascript'>
-        var tuto_status = 0
+        var intro_tuto_endnum = 5;
+        var gorilla_tuto_endnum = 1;
+        var tuto_status = 1;
+        var tuto_gorilla = 0;
 
-              $("#cancelrun").hide();
+//        var tuto_status = 2;
+ //       var tuto_gorilla = 1;
+        $("#cancelrun").hide();
+
         function nexttutorial()
         {
-            var total_page=5
+            if( tuto_gorilla == 0 )
+            {
+                $("#tutopane").load("intro_tuto.html #tuto"+tuto_status)
+                if( tuto_status == intro_tuto_endnum )
+                {
+                    tuto_status = 0;
+                    tuto_gorilla = 1;
+                }
+            }else{
+                $("#tutopane").load("gorilla_tuto.html #tuto"+tuto_status)
+                tuto_status = tuto_status + 1;
+                if( tuto_status == gorilla_tuto_endnum )
+                {
+                    $('#nextbutton').hide();	
+                }
+            }
+            tuto_status = tuto_status + 1;
+
+        /*    var total_page=5
             ++tuto_status;
             for(var i=1; i<=total_page;++i)
                 $('#tuto'+i).hide();
             $('#tuto'+tuto_status).show();
 			if( tuto_status == total_page )
 			{
-				$('#nextbutton').hide();	
-			}
+			} */
         }
         nexttutorial();
+
 	    $("#edit").keydown(function(e) {
 		        if(e.keyCode === 9) { // tab was pressed
 				        // get caret position/selection
