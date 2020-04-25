@@ -29,7 +29,9 @@
 }
 .tutorialpane {
   width: 440px;
+  height: 440px;
   word-wrap: break-word;
+  overflow-y: scroll;
 }
 
 .instruction {
@@ -61,10 +63,10 @@ pre {
 			<div class="tutorialpane grid-item">
             <div id="tutopane">
             </div>
+            <button id="prevbutton" name="button" onclick="prevtutorial();">prev</button>
             <button id="nextbutton" name="button" onclick="nexttutorial();">next</button>
             </div>
-			<textarea id="edit" style="width: 450px; height: 480px;">
-            </textarea>
+			<textarea id="edit" style="width: 450px; height: 480px;"></textarea>
 			<button id="runcode" name="button" onclick="text_changed();">run code</button>
 			<button id="cancelrun" name="button" onclick="cancel_run();">cancel run</button>
 		</div>
@@ -84,16 +86,49 @@ pre {
     <script type="text/javascript" src="jquery-3.4.1.min.js"></script>
     <script type='text/javascript'>
         var intro_tuto_endnum = 5;
-        var gorilla_tuto_endnum = 1;
-        var tuto_status = 1;
+        var gorilla_tuto_endnum = 8;
+        var tuto_status = 0;
         var tuto_gorilla = 0;
 
 //        var tuto_status = 2;
  //       var tuto_gorilla = 1;
         $("#cancelrun").hide();
+    	$('#prevbutton').hide();	
+	function prevtutorial()
+	{
+	    $('#nextbutton').show();	
+	    if( tuto_status == 1 && tuto_gorilla == 0 )
+	    {
+		$('#prevbutton').hide();	
+            }
+            tuto_status = tuto_status - 1;
+            if( tuto_gorilla == 0 )
+            {
+                $("#tutopane").load("intro_tuto.html #tuto"+tuto_status)
+                if( tuto_status == intro_tuto_endnum )
+                {
+                    tuto_status = 0;
+                    tuto_gorilla = 1;
+                    $('#nextbutton').hide();	
+                }
+            }else{
+                $("#tutopane").load("gorilla_tuto.html #tuto"+tuto_status)
+                tuto_status = tuto_status - 1;
+                if( tuto_status == 0 )
+                {
+                    tuto_gorilla = 0;
+                }
+            }
+	}
 
         function nexttutorial()
         {
+            tuto_status = tuto_status + 1;
+	    if( tuto_status != 1 )
+	    {
+    	    	$('#prevbutton').show();
+	    }
+	
             if( tuto_gorilla == 0 )
             {
                 $("#tutopane").load("intro_tuto.html #tuto"+tuto_status)
@@ -104,13 +139,11 @@ pre {
                 }
             }else{
                 $("#tutopane").load("gorilla_tuto.html #tuto"+tuto_status)
-                tuto_status = tuto_status + 1;
                 if( tuto_status == gorilla_tuto_endnum )
                 {
                     $('#nextbutton').hide();	
                 }
             }
-            tuto_status = tuto_status + 1;
 
         /*    var total_page=5
             ++tuto_status;

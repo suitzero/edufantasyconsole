@@ -209,7 +209,7 @@ void main_loop()
 {
 
 #if __EMSCRIPTEN__
-    emscripten_set_main_loop(main_tick, -1, 1);
+    emscripten_set_main_loop(main_tick, 30, 1);
 #else
     while (0 == quit)
     {
