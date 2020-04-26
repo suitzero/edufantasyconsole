@@ -109,16 +109,18 @@ end
 Now Let's learn how to control input!
 
 text = ""
+y=0;x=0;s=0
 function _update()
-	if btn(0) then text = "UP" end
-	if btn(1) then text = "DOWN" end
-	if btn(2) then text = "LEFT" end
-	if btn(3) then text = "RIGHT" end
-	if btn(4) then text = "SPACEBAR" end
+	if btn(0) then text = "UP" y=y-1 end
+	if btn(1) then text = "DOWN" y=y+1 end
+	if btn(2) then text = "LEFT" x=x-1 end
+	if btn(3) then text = "RIGHT" x=x+1 end
+	if btn(4) then text = "SPACEBAR" s=(s+1)%2 end
 end
 function _draw()
 	fill_rect(0,0,256,256,153,217,234)
 	write_text("button:"..text,3,25,55,8)
+	spr(3+s*3,100+x,30+y,40,40)
 end
 
 </pre>
@@ -134,19 +136,77 @@ Physics is human imagination, simpler explanation of what's happening in the rea
 We can make a fake world by using fake represenation of the real world..
 
 <a href="http://shorturl.at/apM04">more detail about the projectile motion</a>
+
+banana={state=0,x=50,y=100,angle=0,velocity=0,spr_num=1,READY=0,Launch=1,EXPLODE=2,width=16,height=12}
+t=0
+g=0.08
+banana.angle=1.2
+banana.velocity=3.5
+
+function _update()
+	 banana.x = banana.x + (banana.velocity * math.cos(banana.angle))
+	banana.y = banana.y - banana.velocity * math.sin(banana.angle) + g*t
+	t=t+1
+	if math.max(banana.x,banana.y) > 256 then
+		banana.x = 50
+		banana.y = 100
+		t=0
+	end
+end
+
+function _draw()
+spr(banana.spr_num,banana.x,banana.y,banana.width,banana.height)
+end
+
 </pre>
 </div>
 
 <div id="tuto7">
 <span>Game Rule</span>
 <pre class="instruction">
+We've learned the all tools to make gorillas.
+what's the remaning step to actually make a game?
+we have to make rules, how we score each player and how a player can actually win a match.
+let's make a rule where player can score a point when he or she hits other player with a banana.
+They play matches three times and one with larger score wins.
+
+
+-- score goes up when the banana hits opponent!
+player1={score=1}
+player2={score=1}
+
+function banana_hit(player)
+	player.score = player.score +1
+end
+
+-- player1 scores
+banana_hit(player1)
+
+game={state=0}
+
+function _draw()
+	fill_rect(0,0,256,256,153,217,234)
+	if game.state == 1 then
+		if player1.score > player2.score then
+			write_text("PLAYER1 WIN",55,100,140,40)
+		else
+			write_text("PLAYER2 WIN",55,100,150,40)
+		end
+	end
+end
+
+function _update()
+	if player1.score + player2.score >= 3 and game.state == 0 then
+		game.state = 1
+	end
+end
 </pre>
 </div>
 
 <div id="tuto8">
 <span>Gorillas!!</span>
 <pre class="instruction">
-Now by combining everything we've learned, now we can confidently make gorillas!
+Now by combining everything we've learned, we can confidently make gorillas!
 
 SCREEN_WIDTH=256
 SCREEN_HEIGHT=256
