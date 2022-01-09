@@ -45,16 +45,9 @@ A manual and tutorial and also exemplary contents were written in HTML format in
 
  A user would write code in Lua programming language based on the instructions provided in the tutoring pane(layout 1) and then execute it through a web assembly based console system. The overall system architecture is shown in figure 2 as follows.
 
- \
-
-
-<p id="gdcalert2" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image2.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert3">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-
 ![alt_text](images/image2.png "image_tooltip")
 
-
-*** Figure 2—Educational Fantasy Console System Architecture ***
+##### Figure 2—Educational Fantasy Console System Architecture
 
  The backbone of the project is possible through the support of LLVM. LLVM is a compiler platform that can be used as a middle layer complete compiler system that allows a developer to write in LLVM supported languages and then compile into intermediate representation code and then into assembly language code that is a machine-dependent [2]. In this project, LLVM is being used to generate web-assembly code from c/c++ code. Web assembly is a binary instruction format for a stack-based virtual machine, which can allow a developer to write code in high-level languages such as c/c++ or rust that has the ability to control native level instructions and can be performance-wise highly optimizable compared to a scripting language like javascript, and then compile into web assembly and run in a web browser with the native level performance [3]. LLVM to compile c/c++ code to Web assembly code, there is an available toolchain called Emscripten. SDL is also being used as a middleware to display and input control.
 
@@ -120,23 +113,14 @@ A manual and tutorial and also exemplary contents were written in HTML format in
   </tr>
 </table>
 
-
-
-*** Table 1 - Tutorial Contents outline ***
+##### Table 1 - Tutorial Contents outline
 
 **4.2 Gorillas (sample game)**
 
 
-    **                      **
-
-<p id="gdcalert3" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image3.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert4">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-
 ![alt_text](images/image3.png "image_tooltip")
 
-
-
-*** Figure 3—EFC version Gorillas ***
+##### Figure 3—EFC version Gorillas
 
 ** **Like it was mentioned in the introduction, the main purpose of the EFC system is introducing game programming to a learner in a way that they can be motivated in learning programming, math, and physics. Gorillas[5] is a video game published in 1991. It was written in QBasic code and popular among MS-DOS users. This game’s core game mechanic is based on projectile motion which is the first thing a student learns in physics class. The game has been re-written in the EFC format and Lua code. But the overall game mechanic follows the original implementation.
 
@@ -202,7 +186,7 @@ A manual and tutorial and also exemplary contents were written in HTML format in
 
 
 
-*** Table 2 — Gorillas Contents outline ***
+#### Table 2 — Gorillas Contents outline
 
 Those contents provide a step by step guideline to build Gorillas from scratch.
 
