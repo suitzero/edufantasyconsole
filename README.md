@@ -34,9 +34,7 @@
 
 ![alt_text](images/image1.png "image_tooltip")
 
-
-
-        **_Figure 1—Educational Fantasy Console Layout_**
+*** Figure 1—Educational Fantasy Console Layout ***
 
 This all in one design provides simplicity which leads to accessibility. There are no extra web pages that a learner has to open to learning how to program or learning the material in Layout 1. This design is intended to eliminate distraction and allows a user to be focused on what they are supposed to learn while having an ability to interact with the system and play with the code and experiment for proficiency.
 
@@ -58,7 +56,7 @@ A manual and tutorial and also exemplary contents were written in HTML format in
 ![alt_text](images/image2.png "image_tooltip")
 
 
-**_Figure 2—Educational Fantasy Console System Architecture_**
+*** Figure 2—Educational Fantasy Console System Architecture ***
 
  The backbone of the project is possible through the support of LLVM. LLVM is a compiler platform that can be used as a middle layer complete compiler system that allows a developer to write in LLVM supported languages and then compile into intermediate representation code and then into assembly language code that is a machine-dependent [2]. In this project, LLVM is being used to generate web-assembly code from c/c++ code. Web assembly is a binary instruction format for a stack-based virtual machine, which can allow a developer to write code in high-level languages such as c/c++ or rust that has the ability to control native level instructions and can be performance-wise highly optimizable compared to a scripting language like javascript, and then compile into web assembly and run in a web browser with the native level performance [3]. LLVM to compile c/c++ code to Web assembly code, there is an available toolchain called Emscripten. SDL is also being used as a middleware to display and input control.
 
@@ -126,7 +124,7 @@ A manual and tutorial and also exemplary contents were written in HTML format in
 
 
 
-            **_Table 1—_**Tutorial Contents outline
+*** Table 1 - Tutorial Contents outline ***
 
 **4.2 Gorillas (sample game)**
 
@@ -140,7 +138,7 @@ A manual and tutorial and also exemplary contents were written in HTML format in
 
 
 
-        **_                      	Figure 3—EFC version _**Gorillas
+*** Figure 3—EFC version Gorillas ***
 
 ** **Like it was mentioned in the introduction, the main purpose of the EFC system is introducing game programming to a learner in a way that they can be motivated in learning programming, math, and physics. Gorillas[5] is a video game published in 1991. It was written in QBasic code and popular among MS-DOS users. This game’s core game mechanic is based on projectile motion which is the first thing a student learns in physics class. The game has been re-written in the EFC format and Lua code. But the overall game mechanic follows the original implementation.
 
@@ -206,7 +204,7 @@ A manual and tutorial and also exemplary contents were written in HTML format in
 
 
 
-            **_Table 2—_**Gorillas Contents outline
+*** Table 2 — Gorillas Contents outline ***
 
 Those contents provide a step by step guideline to build Gorillas from scratch.
 
