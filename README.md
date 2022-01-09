@@ -1,6 +1,7 @@
 # edufantasyconsole
 
-##Abstract— This document introduces the Educational Fantasy Console(EFC) system that was developed for a development track project. Design, architecture, sample contents, and expected efficacy of using this platform in the education scenario is discussed in this paper.
+## Abstract
+This document introduces the Educational Fantasy Console(EFC) system that was developed for a development track project. Design, architecture, sample contents, and expected efficacy of using this platform in the education scenario is discussed in this paper.
 
 ### 1 INTRODUCTION
 
@@ -99,10 +100,10 @@ Those contents provide a step by step guideline to build Gorillas from scratch.
  As future work, Adding quality content to the system would allow the system to be used in broad audiences. Editor pane can be also improved in a way that is more similar to IDE and gives interactive tutoring and tips inside the editor pane in an efficient manner would be more ideal. The chat functionality per content would allow learners to interact with each other and would improve the learning experience and give users a sense of being in community.
 
 ### 6. REFERENCE
-The Costs of Developing an App: $1,000 vs. $10,000 vs $100,000 App. (2020, April 21). Retrieved from https://buildfire.com/app-development-costs-difference/
-LLVM. (2020, April 14). Retrieved from https://en.wikipedia.org/wiki/LLVM
-WebAssembly. (n.d.). Retrieved from https://webassembly.org/
-Type-in program. (2020, April 2). Retrieved from https://en.wikipedia.org/wiki/Type-in_program
-Gorillas (video game). (2020, April 10). Retrieved from https://en.wikipedia.org/wiki/Gorillas_(video_game)
+1. The Costs of Developing an App: $1,000 vs. $10,000 vs $100,000 App. (2020, April 21). Retrieved from https://buildfire.com/app-development-costs-difference/
+2. LLVM. (2020, April 14). Retrieved from https://en.wikipedia.org/wiki/LLVM
+3. WebAssembly. (n.d.). Retrieved from https://webassembly.org/
+4. Type-in program. (2020, April 2). Retrieved from https://en.wikipedia.org/wiki/Type-in_program
+5. Gorillas (video game). (2020, April 10). Retrieved from https://en.wikipedia.org/wiki/Gorillas_(video_game)
 
 
