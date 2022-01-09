@@ -34,7 +34,9 @@
 
 ![alt_text](images/image1.png "image_tooltip")
 
-*** Figure 1—Educational Fantasy Console Layout ***
+| *Figure 1—Educational Fantasy Console Layout* |
+
+
 
 This all in one design provides simplicity which leads to accessibility. There are no extra web pages that a learner has to open to learning how to program or learning the material in Layout 1. This design is intended to eliminate distraction and allows a user to be focused on what they are supposed to learn while having an ability to interact with the system and play with the code and experiment for proficiency.
 
