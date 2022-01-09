@@ -28,13 +28,9 @@
  Secondly, this is designed to be all in one platform, both visually and functionally. It’s a single page that includes a manual, tutorial, code editor(or IDE), console display window, console standard output window. Figure 1 shows the overall layout of the system, Layout 1 shows a manual or tutorial page. Layout 2 is an editor or IDE where a user can write code. Layout 3 is a console display where a user can render or draw stuff on the small screen. Layout 4 is a standard output console where users can use to print debugging messages or to get immediate output from code rather than displaying pixel by pixel as it does in code that uses Layout 3.
 
 
-
-<p id="gdcalert1" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image1.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert2">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-
 ![alt_text](images/image1.png "image_tooltip")
 
-| *Figure 1—Educational Fantasy Console Layout* |
+### Figure 1—Educational Fantasy Console Layout* 
 
 
 
