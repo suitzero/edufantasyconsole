@@ -30,7 +30,7 @@
 
 ![alt_text](images/image1.png "image_tooltip")
 
-### Figure 1—Educational Fantasy Console Layout* 
+##### Figure 1—Educational Fantasy Console Layout
 
 
 
