@@ -1,3 +1,7 @@
+# Abstract
+
+ This project was being done for the educational technology course from my master degree. In short, it's a bullshit project that mimicking the pico8 in webbrowser. I need to find a job, so that I'm updating it to see if any company takes a bait.
+ 
 # **1 INTRODUCTION**
 
  The Educational Fantasy Console(EFC) intelligent tutoring system(ITS) is targeting programming, math, and physics education all at once by introducing game programming to a learner.
