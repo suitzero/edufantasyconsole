@@ -1,7 +1,9 @@
 # Abstract
 
  This project was being done for the educational technology course from my master degree. In short, it's a bullshit project that mimicking the pico8 in webbrowser. I need to find a job, so that I'm updating it to see if any company takes a bait.
- you can run the demo from the following address,
+ 
+ it's demo can be accessed from the following address,
+ 
  https://suitzero.github.io/edufantasyconsole/
  
 # **1 INTRODUCTION**
