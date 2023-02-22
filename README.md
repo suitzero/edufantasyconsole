@@ -1,6 +1,6 @@
 # Abstract
 
- This project was being done for the educational technology course from my master degree. In short, it's a quick copy version of pico8 with some tutorial. 
+ In short, it's a quick copy version of pico8 with some tutorial. 
  Its demo can be accessed from the following address,
  
  https://suitzero.github.io/edufantasyconsole/
